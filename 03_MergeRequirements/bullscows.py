@@ -4,7 +4,7 @@ from random import randint
 
 def bullscows(guess: str, secret: str) -> (int, int):
     bulls = len(guess) - textdistance.hamming(guess, secret)
-    cows = len(guess) - textdistance.bag(guess, secret)
+    cows = max(len(guess) - textdistance.bag(guess, secret) - bulls, 0)
     return bulls, cows
 
 
