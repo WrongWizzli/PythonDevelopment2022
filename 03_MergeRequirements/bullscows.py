@@ -1,7 +1,5 @@
 import textdistance
 from random import randint
-import sys
-import urllib.request
 
 
 def bullscows(guess: str, secret: str) -> (int, int):
@@ -12,7 +10,6 @@ def bullscows(guess: str, secret: str) -> (int, int):
 
 def ask(prompt: str, valid: list[str] = None) -> str:
     if valid is not None:
-        print(valid)
         in_word = input(prompt)
         while in_word not in valid:
             in_word = input(prompt)
@@ -34,18 +31,3 @@ def gameplay(ask: callable, inform: callable, words: list[str]) -> int:
         b, c = bullscows(in_word, secret_word)
         inform("Быки: {}, Коровы: {}", b, c)
     return counter
-
-
-def main():
-    dict_url = sys.argv[1]
-    if len(sys.argv) >= 3:
-        needed_len = sys.argv[2]
-    else:
-        needed_len = 5
-    with urllib.request.urlopen(dict_url) as f:
-        words = [word.decode('utf-8').strip() for word in f.readlines()]
-    words = [word for word in words if len(word) == needed_len]
-    print(gameplay(ask, inform, words))
-
-
-main()
