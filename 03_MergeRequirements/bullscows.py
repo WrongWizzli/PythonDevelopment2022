@@ -24,8 +24,8 @@ def inform(format_string: str, bulls: int, cows: int) -> None:
 
 def gameplay(ask: callable, inform: callable, words: list[str]) -> int:
     secret_word = words[randint(0, len(words))]
-    c, counter = 0, 0
-    while c != len(secret_word): 
+    b, counter = 0, 0
+    while b != len(secret_word): 
         in_word = ask("Введите слово: ", words)
         counter += 1
         b, c = bullscows(in_word, secret_word)
